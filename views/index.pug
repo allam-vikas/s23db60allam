@@ -1,0 +1,17 @@
+extends layout
+
+block content
+  h1= title
+  p Welcome to pug module Lab 10 Assignment #{title}
+  button(type="button", class="btn btn-warning",onClick="goFaster()") Press Me <br>
+  div(id="faster") Increase the speed
+  a(href="/vehicles") Search results for vehicles
+    script.
+      var mph = 20;
+      var change = 1; 
+
+      function goFaster() {
+        mph += change;
+        change++;
+        document.getElementById('faster').innerText = `MPH ${mph} with change ${change}`;
+      }
