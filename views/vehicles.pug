@@ -1,15 +1,10 @@
 extends layout
- 
+
 block content
   h1= title
 
-    -var results =[{name:"RANGE ROVER", mileage:"20000", color:"White"},{name:"BMW", mileage:"200000", color:"Black"},{name:"FORD", mileage:"300000", color:"Blue"}]
+    - var items=[{name:"RANGE ROVER", mileage:"20000", color:"White"},{name:"BMW", mileage:"200000", color:"Black"},{name:"FORD", mileage:"300000", color:"Blue"}]
   div(class="container-fluid")
   div(class="row")
-   each r,index  in results
-    div(class="col-sm-2" onclick =`buy(${index})`) #{r.name}, #{r.mileage}, #{r.color}
-    script.
-        function buy(a)
-        {
-           alert(`You purchased Item ${a+1}`)
-        }
+   each r  in items
+    div(class="col-sm-2" ) #{r.name}, #{r.color}, #{r.mileage}
