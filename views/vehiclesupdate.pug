@@ -1,0 +1,52 @@
+extends layout
+
+block content
+    h1= title
+    
+    if(toShow == null)
+        h2 No instance to delete
+    else
+
+    div.row(class='mb-2')
+        div.mr-1 ID is
+        div #{vehiclesid}
+
+    form(id='vehiclesForm', action= actionid, method="PUT")
+        div.form-group
+            label.vehiclesAttr(for='name') Vehicles Name
+            input#name(type='text', name='name', value= name, class='form-control')
+        div.form-group
+            label.vehiclesAttr(for='color') Vehicles Color
+            input#color(type='text', name='color', value= color, class='form-control')
+        div.form-group
+            label.vehiclesAttr(for='mileage') Vehicles Mileage
+            input#mileage(type='number', name='mileage', value= mileage, class='form-control')
+        button.btn.btn-primary(type="submit") Save
+
+    script.
+        document.forms['vehiclesForm'].addEventListener('submit', (event) => {
+            event.preventDefault();
+            const form = event.target;
+            // Basic client-side validation
+            if (!form.name.value || !form.color.value || !form.mileage.value) {
+                alert('Please fill in all fields');
+                return;
+            }
+            // TODO: Add visual feedback here to show that the form is being submitted
+
+            fetch(form.action, {
+                method: 'PUT',
+                body: new URLSearchParams(new FormData(form))
+            }).then((resp) => {
+                if (!resp.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return resp.json();
+            }).then((body) => {
+                alert('Save succeeded');
+                // TODO: Handle successful response if needed
+            }).catch((error) => {
+                alert('Save failed: ' + error.message);
+                // TODO: Handle error
+            });
+        });

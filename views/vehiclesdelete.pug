@@ -1,0 +1,54 @@
+extends layout
+
+block content
+    h1= title
+
+    if(toShow == null)
+        h2 No instance to delete
+    else
+        - let vehiclesid = toShow._id.toString()
+        - let name = toShow.nmae
+        - let color = toShow.color
+        - let mileage = toShow.mileage
+        - let actionid = "/resource/vehicless/" + vehiclesid
+        script let actionid = "#{actionid}"
+        div
+            div.row
+                div(class='vehiclesAttr mr-3') vehicles ID is:
+                div #{vehiclesid}
+            div.row
+                div(class='vehiclesAttr mr-3') vehicles Name is:
+                div #{name}
+            div.row
+                div(class='vehiclesAttr mr-3') vehicles color is:
+                div #{color}
+            div.row
+                div(class='vehiclesAttr mr-3') vehicles mileage is:
+                div #{mileage}
+
+            button(class="btn btn-danger m-2" onclick="deleteOnid()") Delete
+            button(class="btn btn-secondary m-2" onclick="cancel()") Cancel
+            
+        script.
+            function cancel() {
+            // Go back to the home page for the costume collection
+            window.location.href='/vehicless'
+            }
+
+        script.
+            function deleteOnid() {
+                console.log("starting delete")
+                // delete first
+                fetch(actionid, {
+                method: 'DELETE' // Don't need a body for the delete
+                }).then((resp) => {
+                return resp.json(); // or resp.text() or whatever the server sends
+                }).then((body) => {
+                alert("Delete succeded")
+                window.location.href='/vehicless'
+                // TODO handle body
+                }).catch((error) => {
+                // TODO handle error
+                alert("Delete failed " + error )
+                });
+            }

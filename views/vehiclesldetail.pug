@@ -1,0 +1,22 @@
+extends layout
+
+block content
+  div.container
+    h1= title
+    if(toShow == null)
+        h2 No instance to delete
+    else
+    div.card.mt-4
+      div.card-body
+        div.row.mb-3
+          div.col-4.vehiclesAttr Vehicles ID:
+          div.col-8 #{vehiclesid}
+        div.row.mb-3
+          div.col-4.vehiclesAttr Vehicles Name:
+          div.col-8 #{name}
+        div.row.mb-3
+          div.col-4.vehiclesAttr Vehicles Color:
+          div.col-8 #{color}
+        div.row.mb-3
+          div.col-4.vehiclesAttr Vehicles Mileage:
+          div.col-8 #{mileage}
