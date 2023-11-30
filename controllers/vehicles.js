@@ -62,8 +62,8 @@ exports.vehicles_update_put = async function(req, res) {
 // Handle a show all view
 exports.vehicles_view_all_Page = async function(req, res) {
     try{
-    thevehicless = await vehicles.find();
-    res.render('vehicless', { title: 'vehicles Search Results', results: thevehicless });
+    result = await vehicles.find();
+    res.render('vehicles', { title: 'vehicles Search Results', results: result });
     }
     catch(err){
     res.status(500);

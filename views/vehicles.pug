@@ -2,9 +2,22 @@ extends layout
 
 block content
   h1= title
+  a.btn.btn-primary.btn-sm(href='/vehicles/create') Create New 
+  - var items = results
+    
 
-    - var items=[{name:"RANGE ROVER", mileage:"20000", color:"White"},{name:"Audi", mileage:"200000", color:"Black"},{name:"FORD", mileage:"300000", color:"Blue"}]
   div(class="container-fluid")
-  div(class="row")
-   each r  in items
-    div(class="col-sm-2" ) #{r.name}, #{r.color}, #{r.mileage}
+    div(class="row m-1")
+      each item in items
+        - let destination = `dispatch("/vehicles/update?id=${item._id}")`
+        - let destination1 = `dispatch("/vehicles/delete?id=${item._id}")`
+        - let destination2 = `dispatch("/vehicles/detail?id=${item._id}")`
+        div(class="row-sm-2 m-1") Item #{item.name} (#{item.color}) is #{item.mileage}
+        button.btn(class="btn-primary ml-1", onclick=destination) Update
+        button.btn(class="btn-primary ml-1", onclick=destination1) detail
+        button.btn(class="btn-primary ml-1", onclick=destination2) delete
+
+  script.
+    function dispatch(path){
+      window.location.href = path;
+    }
